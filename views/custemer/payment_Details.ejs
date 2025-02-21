@@ -1,0 +1,180 @@
+<!-- payment_Details.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Details</title>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 p-6">
+    <div class="max-w-md mx-auto bg-white p-6 rounded-lg shadow-lg">
+        <h1 class="text-2xl font-bold mb-4">ENTER THE PAYMENT DETAILS</h1>
+        <div class="mb-4">
+            <h2 class="text-xl font-semibold">Payment Summary</h2>
+            <div class="mt-2">
+                <p>Base Fare, Fuel and Transaction Charges: <span class="font-bold">₹<%= baseFare %></span></p>
+                <p>Meal Combo Charges: <span class="font-bold">₹<%= mealComboCharge %></span></p>
+                <p>Priority Checkin Fees: <span class="font-bold">₹<%= priorityCheckinFee %></span></p>
+                <p>Insurance Fees: <span class="font-bold">₹<%= insuranceFee %></span></p>
+            </div>
+        </div>
+        <div class="mb-4">
+            <h2 class="text-xl font-semibold">Total: <span class="font-bold">₹<%= total %></span></h2>
+        </div>
+        <div class="mb-4">
+            <div class="bg-white p-6 rounded-lg shadow-lg text-center">
+                <h2 class="text-xl font-bold mb-4">Pay with Razorpay</h2>
+                <input id="amount" name="amount" type="number" value="<%= total %>" readonly class="border p-2 rounded mb-4 w-full text-center">
+                <button id="payBtn" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700">Pay Now</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("payBtn").addEventListener("click", async () => {
+            const amount = document.getElementById("amount").value;
+
+            if (!amount) {
+                return alert("Enter amount");
+            }
+
+            const response = await fetch("/create-order", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ amount }),
+            });
+
+            const order = await response.json();
+
+            const options = {
+                key: "<%= key %>",
+                amount: order.amount,
+                currency: "INR",
+                order_id: order.id,
+                name: "Test Company",
+                description: "Test Transaction",
+                handler: async function (response) {
+                    alert("Payment Successful! Payment ID: " + response.razorpay_payment_id);
+                    const pnr = "<%= pnr %>";
+                    const paymentId = response.razorpay_payment_id;
+                    window.location.href = `/download-ticket/${pnr}?paymentId=${paymentId}`;
+                },
+                prefill: {
+                    name: "ABC XYZ",
+                    email: "abc@gmail.com",
+                    contact: "46578 89784",
+                },
+                theme: { color: "#3399cc" },
+            };
+
+            const rzp = new Razorpay(options);
+            rzp.open();
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+<!-- 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Details</title>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 p-6">
+    <div class="max-w-md mx-auto bg-white p-6 rounded-lg shadow-lg">
+        <h1 class="text-2xl font-bold mb-4">ENTER THE PAYMENT DETAILS</h1>
+        <div class="mb-4">
+            <h2 class="text-xl font-semibold">Payment Summary</h2>
+            <div class="mt-2">
+                <p>Base Fare, Fuel and Transaction Charges: <span class="font-bold">₹<%= baseFare %></span></p>
+                <p>Meal Combo Charges: <span class="font-bold">₹<%= mealComboCharge %></span></p>
+                <p>Priority Checkin Fees: <span class="font-bold">₹<%= priorityCheckinFee %></span></p>
+                <p>Insurance Fees: <span class="font-bold">₹<%= insuranceFee %></span></p>
+            </div>
+        </div>
+        <div class="mb-4">
+            <h2 class="text-xl font-semibold">Total: <span class="font-bold">₹<%= total %></span></h2>
+        </div>
+        <!-- <div class="mb-4">
+            <p>Your Payment/Transaction ID is <span class="font-bold"><%= pnr %></span>. Please note it down for future reference.</p>
+        </div> 
+        <div class="mb-4 ">
+
+            <div class="bg-white p-6 rounded-lg shadow-lg text-center">
+                <h2 class="text-xl font-bold mb-4">Pay with Razorpay</h2>
+                <input id="amount" name="amount" type="number" value="<%= total %>" readonly class="border p-2 rounded mb-4 w-full text-center">
+                <button id="payBtn" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700">Pay Now</button>
+            </div>
+            
+        </div>
+    </div>
+
+    <script>
+
+        document.getElementById("payBtn").addEventListener("click", async () => {
+
+            console.log("click on button of 'PAY NOW'");
+            
+            const amount = document.getElementById("amount").value;
+
+            if (!amount) {
+                
+                return alert("Enter amount");
+            }
+
+            const responce = await fetch("/create-order", {
+
+                method : "POST",
+                headers : { "Content-Type": "application/json" },
+                body : JSON.stringify({ amount }),
+            })
+
+
+            const order = await responce.json();
+
+            const options = {
+
+                key: "<%= key %>",
+                amount: order.amount,
+                currency: "INR",
+                order_id: order.id,
+                name: "Test Company",
+                description: "Test Transaction",
+                handler: function (response) {
+                    alert("Payment Successful! Payment ID: " + response.razorpay_payment_id);
+                },
+                prefill: {
+                    name: "ABC XYZ",
+                    email: "abc@gmail.com",
+                    contact: "46578 89784",
+                },
+                theme: { color: "#3399cc" },
+            };
+
+            const rzp = new Razorpay(options);
+            rzp.open();
+            
+        })
+
+    </script>
+
+</body>
+</html>
+ -->
+
+
+

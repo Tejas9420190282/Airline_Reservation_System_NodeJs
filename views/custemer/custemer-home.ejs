@@ -1,0 +1,75 @@
+<!--  custemer-home.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Customer Dashboard - HINDUSTAN AIRLINES</title>
+        <!-- Tailwind CSS CDN -->
+        <script src="https://cdn.tailwindcss.com"></script>
+    </head>
+    <body class="bg-gray-100">
+        <div class="container mx-auto p-4">
+            <!-- Header -->
+            <header class="bg-blue-600 text-white p-4 rounded-t-lg">
+                <h1 class="text-2xl font-bold">HINDUSTAN AIRLINES</h1>
+                <p class="text-sm">Welcome, <%= userName %></p>
+            </header>
+
+            <!-- Main Content -->
+            <main class="bg-white p-6 rounded-b-lg shadow-lg">
+                <h2 class="text-xl font-semibold mb-4">Customer Dashboard</h2>
+
+                <!-- Actions -->
+                <div class="space-y-4 p-6">
+                    <!-- Book Flight Tickets -->
+                    <div class="bg-gray-50 p-4 rounded-lg shadow-sm">
+                        <h3 class="text-lg font-medium">Book Flight Tickets</h3>
+                        <p class="text-sm text-gray-600">
+                            Search and book your flight tickets.
+                        </p>
+                        <a
+                            href="/book-now"
+                            class="inline-block mt-2 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+                        >
+                            Book Now
+                        </a>
+                    </div>
+
+                    <!-- View Booked Flight Tickets -->
+                    <div class="bg-gray-50 p-4 rounded-lg shadow-sm">
+                        <h3 class="text-lg font-medium">
+                            View Booked Flight Tickets
+                        </h3>
+                        <p class="text-sm text-gray-600">
+                            View your booked flight tickets.
+                        </p>
+                        <a
+                            href="/show-ticket-prn-search"
+                            class="inline-block mt-2 bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600"
+                        >
+                            View Tickets
+                        </a>
+                    </div>
+
+                    <!-- Cancel Booked Flight Tickets -->
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-sm">
+                        <h3 class="text-lg font-medium">
+                            Cancel Booked Flight Tickets
+                        </h3>
+                        <p class="text-sm text-gray-600">
+                            Cancel your booked flight tickets.
+                        </p>
+                        <a
+                            href="/cancel-ticket"
+                            class="inline-block mt-1 bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600"
+                        >
+                            Cancel Tickets
+                        </a>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </body>
+</html>

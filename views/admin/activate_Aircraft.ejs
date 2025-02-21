@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Activate Aircraft - AADITH AIRLINES</title>
+  <!-- Tailwind CSS CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+  <div class="container mx-auto p-8">
+    <!-- Header -->
+    <header class="bg-blue-600 text-white p-6 rounded-t-lg">
+      <h1 class="text-3xl font-bold">HINDUSTAN AIRLINES</h1>
+      <p class="text-lg">ENTER THE AIRCRAFT TO BE ACTIVATED</p>
+    </header>
+
+    <%- include("../navbar") %>
+    <!-- Main Content -->
+    <main class="bg-white p-6 rounded-b-lg shadow-lg">
+
+      <form action="/activate-aircraft-form" method="POST" class="space-y-4">
+        <!-- Jet ID Input -->
+        <div>
+          <label for="jetId" class="block text-sm font-medium text-gray-700">Enter a valid Jet ID</label>
+          <input
+            type="text"
+            id="jetId"
+            name="jetId"
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+            placeholder="Jet ID"
+            required
+          />
+        </div>
+
+        <!-- Submit Button -->
+        <div>
+          <button
+            type="submit"
+            class="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+          >
+            Activate Aircraft
+          </button>
+        </div>
+      </form>
+    </main>
+  </div>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scheduled Flights</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 p-6">
+    <div class="max-w-6xl mx-auto bg-white p-6 rounded-lg shadow-lg">
+        <h1 class="text-2xl font-bold mb-4">View Scheduled Flights</h1>
+
+        <!-- Flights Table -->
+        <h2 class="text-xl font-bold mb-4">Scheduled Flight List</h2>
+        <table class="w-full border-collapse border border-gray-300 mb-6">
+            <thead>
+                <tr class="bg-gray-200">
+                    <th class="border border-gray-300 p-2">Flight Number</th>
+                    <th class="border border-gray-300 p-2">From</th>
+                    <th class="border border-gray-300 p-2">To</th>
+                    <th class="border border-gray-300 p-2">Departure Date</th>
+                    <th class="border border-gray-300 p-2">Arrival Date</th>
+                    <th class="border border-gray-300 p-2">Departure Time</th>
+                    <th class="border border-gray-300 p-2">Arrival Time</th>
+                    <th class="border border-gray-300 p-2">Economy Seats</th>
+                    <th class="border border-gray-300 p-2">Business Seats</th>
+                    <th class="border border-gray-300 p-2">Economy Price</th>
+                    <th class="border border-gray-300 p-2">Business Price</th>
+                    <th class="border border-gray-300 p-2">Jet ID</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (flights.length > 0) { %>
+                    <% flights.forEach(flight => { %>
+                        <tr>
+                            <td class="border border-gray-300 p-2"><%= flight.flight_no %></td>
+                            <td class="border border-gray-300 p-2"><%= flight.from_city %></td>
+                            <td class="border border-gray-300 p-2"><%= flight.to_city %></td>
+                            <td class="border border-gray-300 p-2"><%= flight.departure_date %></td>
+                            <td class="border border-gray-300 p-2"><%= flight.arrival_date %></td>
+                            <td class="border border-gray-300 p-2"><%= flight.departure_time %></td>
+                            <td class="border border-gray-300 p-2"><%= flight.arrival_time %></td>
+                            <td class="border border-gray-300 p-2"><%= flight.seats_economy %></td>
+                            <td class="border border-gray-300 p-2"><%= flight.seats_business %></td>
+                            <td class="border border-gray-300 p-2"><%= flight.price_economy %></td>
+                            <td class="border border-gray-300 p-2"><%= flight.price_business %></td>
+                            <td class="border border-gray-300 p-2"><%= flight.jet_id %></td>
+                        </tr>
+                    <% }) %>
+                <% } else { %>
+                    <tr>
+                        <td colspan="12" class="border border-gray-300 p-2 text-center">No scheduled flights available</td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

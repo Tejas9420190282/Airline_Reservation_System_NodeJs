@@ -1,0 +1,111 @@
+
+<!-- search_Flight_Result.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search Results</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+  <%- include("../Navbar") %>
+
+  <div class="container mx-auto p-4">
+    <header class="bg-blue-600 text-white p-4 rounded-t-lg">
+      <h1 class="text-2xl font-bold">SEARCH RESULTS</h1>
+    </header>
+
+    <main class="bg-white p-6 rounded-b-lg shadow-lg">
+      <% if (flights.length > 0) { %>
+        <form action="/selected-available-flight" method="POST">
+          <!-- Hidden fields for search criteria -->
+          <input type="hidden" name="passengers" value="<%= passengers %>">
+          <input type="hidden" name="sit_class" value="<%= sit_class %>">
+          <input type="hidden" name="flight_no" value="<%= flights[0].flight_no %>">
+          <input type="hidden" name="departure_date" value="<%= flights[0].departure_date %>">
+          <input type="hidden" name="origin" value="<%= flights[0].from_city %>">
+          <input type="hidden" name="destination" value="<%= flights[0].to_city %>">
+
+          <table class="min-w-full bg-white border border-gray-300">
+            <thead>
+              <tr class="bg-gray-200">
+                <th class="py-2 px-4 border">Flight No</th>
+                <th class="py-2 px-4 border">Origin</th>
+                <th class="py-2 px-4 border">Destination</th>
+                <th class="py-2 px-4 border">Departure Date</th>
+                <th class="py-2 px-4 border">Departure Time</th>
+                <th class="py-2 px-4 border">Arrival Time</th>
+                <th class="py-2 px-4 border">Seats Available</th>
+                <th class="py-2 px-4 border">Price</th>
+                <th class="py-2 px-4 border">Select</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% flights.forEach((flight) => { %>
+                <tr class="hover:bg-gray-50">
+                  <td class="py-2 px-4 border"><%= flight.flight_no %></td>
+                  <td class="py-2 px-4 border"><%= flight.from_city %></td>
+                  <td class="py-2 px-4 border"><%= flight.to_city %></td>
+                  <td class="py-2 px-4 border"><%= flight.departure_date %></td>
+                  <td class="py-2 px-4 border"><%= flight.departure_time %></td>
+                  <td class="py-2 px-4 border"><%= flight.arrival_time %></td>
+                  
+                  <% if (sit_class === 'Economy') { %>
+                    <td class="py-2 px-4 border"><%= flight.seats_economy %></td>
+                    <td class="py-2 px-4 border"><%= flight.price_economy %></td>
+                  <% } else if (sit_class === 'Business') { %>
+                    <td class="py-2 px-4 border"><%= flight.seats_business %></td>
+                    <td class="py-2 px-4 border"><%= flight.price_business %></td>
+                  <% } %>
+                  
+                  <td class="py-2 px-4 border">
+                    <!-- Radio button with flight data attributes -->
+                    <input 
+                      type="radio" 
+                      name="selectedFlight" 
+                      value="<%= flight.flight_no %>"
+                      data-departure-date="<%= flight.departure_date %>"
+                      data-origin="<%= flight.from_city %>"
+                      data-destination="<%= flight.to_city %>"
+                      required
+                    >
+                  </td>
+                </tr>
+              <% }) %>
+            </tbody>
+          </table>
+
+          <!-- Hidden fields for flight details (will be populated by JavaScript) -->
+          <input type="hidden" name="flight_no" id="selectedFlightNo">
+          <input type="hidden" name="departure_date" id="selectedDepartureDate">
+          <input type="hidden" name="origin" id="selectedOrigin">
+          <input type="hidden" name="destination" id="selectedDestination">
+
+          <div class="mt-6">
+            <button type="submit" class="w-full bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">
+              Proceed to Book ✈️
+            </button>
+          </div>
+        </form>
+      <% } else { %>
+        <p class="text-center text-gray-600">No flights found matching your criteria.</p>
+      <% } %>
+    </main>
+  </div>
+
+  <!-- JavaScript to update hidden fields -->
+  <script>
+    document.querySelectorAll('input[name="selectedFlight"]').forEach(radio => {
+      radio.addEventListener('change', (e) => {
+        const selectedFlight = e.target;
+        document.getElementById('selectedFlightNo').value = selectedFlight.value;
+        document.getElementById('selectedDepartureDate').value = selectedFlight.dataset.departureDate;
+        document.getElementById('selectedOrigin').value = selectedFlight.dataset.origin;
+        document.getElementById('selectedDestination').value = selectedFlight.dataset.destination;
+      });
+    });
+  </script>
+</body>
+</html>

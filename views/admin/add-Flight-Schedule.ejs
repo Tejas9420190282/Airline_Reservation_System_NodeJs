@@ -1,0 +1,206 @@
+<!-- add-Flight_Schedule.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Flight Schedule - HINDUSTAN AIRLINES</title>
+  <!-- Tailwind CSS CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+  <div class="container mx-auto p-8">
+    <!-- Header -->
+    <header class="bg-blue-600 text-white p-6 rounded-t-lg">
+      <h1 class="text-3xl font-bold">HINDUSTAN AIRLINES</h1>
+      <p class="text-lg">Add Flight Schedule</p>
+    </header>
+
+    <!-- Main Content -->
+    <main class="bg-white p-6 rounded-b-lg shadow-lg">
+      <form action="/add-flight-schedule" method="POST" class="space-y-4">
+        <!-- Flight Number -->
+        <div>
+          <label for="flightNumber" class="block text-sm font-medium text-gray-700">Flight Number</label>
+          <input
+            type="text"
+            id="flightNumber"
+            name="flightNumber"
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+            placeholder="Enter Flight Number"
+            required
+          />
+        </div>
+
+        <!-- Origin -->
+        <div>
+          <label for="origin" class="block text-sm font-medium text-gray-700">Origin</label>
+          <select
+            id="origin"
+            name="origin"
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+            required
+          >
+            <option value="" disabled selected>Select Origin</option>
+            <option value="Mumbai">Mumbai</option>
+            <option value="Pune">Pune</option>
+            <option value="Nagpur">Nagpur</option>
+            <option value="Delhi">Delhi</option>
+            <option value="Ahmedabad">Ahmedabad</option>
+            <option value="Bangalore">Bangalore</option>
+            <option value="Chennai">Chennai</option>
+            <option value="Kolkata">Kolkata</option>
+            <option value="Surat">Surat</option>
+          </select>
+        </div>
+
+        <!-- Destination -->
+        <div>
+          <label for="destination" class="block text-sm font-medium text-gray-700">Destination</label>
+          <select
+            id="destination"
+            name="destination"
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+            required
+          >
+            <option value="" disabled selected>Select Destination</option>
+            <option value="Mumbai">Mumbai</option>
+            <option value="Pune">Pune</option>
+            <option value="Nagpur">Nagpur</option>
+            <option value="Delhi">Delhi</option>
+            <option value="Ahmedabad">Ahmedabad</option>
+            <option value="Bangalore">Bangalore</option>
+            <option value="Chennai">Chennai</option>
+            <option value="Kolkata">Kolkata</option>
+            <option value="Surat">Surat</option>
+          </select>
+        </div>
+
+        <!-- Departure Date -->
+        <div>
+          <label for="departureDate" class="block text-sm font-medium text-gray-700">Departure Date</label>
+          <input
+            type="date"
+            id="departureDate"
+            name="departureDate"
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+            required
+          />
+        </div>
+
+        <!-- Departure Time -->
+        <div>
+          <label for="departureTime" class="block text-sm font-medium text-gray-700">Departure Time</label>
+          <input
+            type="time"
+            id="departureTime"
+            name="departureTime"
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+            required
+          />
+        </div>
+
+        <!-- Arrival Date -->
+        <div>
+          <label for="arrivalDate" class="block text-sm font-medium text-gray-700">Arrival Date</label>
+          <input
+            type="date"
+            id="arrivalDate"
+            name="arrivalDate"
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+            required
+          />
+        </div>
+
+        <!-- Arrival Time -->
+        <div>
+          <label for="arrivalTime" class="block text-sm font-medium text-gray-700">Arrival Time</label>
+          <input
+            type="time"
+            id="arrivalTime"
+            name="arrivalTime"
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+            required
+          />
+        </div>
+
+        <!-- Number of Seats (Economy Class) -->
+        <div>
+          <label for="economySeats" class="block text-sm font-medium text-gray-700">Number of Seats (Economy Class)</label>
+          <input
+            type="number"
+            id="economySeats"
+            name="economySeats"
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+            placeholder="Enter Economy Class Seats"
+            required
+          />
+        </div>
+
+        <!-- Number of Seats (Business Class) -->
+        <div>
+          <label for="businessSeats" class="block text-sm font-medium text-gray-700">Number of Seats (Business Class)</label>
+          <input
+            type="number"
+            id="businessSeats"
+            name="businessSeats"
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+            placeholder="Enter Business Class Seats"
+            required
+          />
+        </div>
+
+        <!-- Ticket Price (Economy Class) -->
+        <div>
+          <label for="economyPrice" class="block text-sm font-medium text-gray-700">Ticket Price (Economy Class)</label>
+          <input
+            type="number"
+            id="economyPrice"
+            name="economyPrice"
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+            placeholder="Enter Economy Class Price"
+            required
+          />
+        </div>
+
+        <!-- Ticket Price (Business Class) -->
+        <div>
+          <label for="businessPrice" class="block text-sm font-medium text-gray-700">Ticket Price (Business Class)</label>
+          <input
+            type="number"
+            id="businessPrice"
+            name="businessPrice"
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+            placeholder="Enter Business Class Price"
+            required
+          />
+        </div>
+
+        <!-- Jet ID -->
+        <div>
+          <label for="jetId" class="block text-sm font-medium text-gray-700">Jet ID</label>
+          <input
+            type="text"
+            id="jetId"
+            name="jetId"
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+            placeholder="Enter Jet ID"
+            required
+          />
+        </div>
+
+        <!-- Submit Button -->
+        <div>
+          <button
+            type="submit"
+            class="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+          >
+            Add Flight Schedule
+          </button>
+        </div>
+      </form>
+    </main>
+  </div>
+</body>
+</html>
