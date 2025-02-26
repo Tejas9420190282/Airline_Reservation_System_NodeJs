@@ -27,7 +27,6 @@ const { resultSearchPRN_Router } = require('./router/custemer/result_Search_PRN_
 const { viewScheduleFlightListRouter } = require('./router/admin/view_Schedule_Flight_List_Router');
 const { searchPassengerUsingFlight_Number_Router } = require('./router/admin/Search_Pssengers_Using_Flight_Number_Router');
 const { ResultsearchPassengerUsingFlight_Number_Router } = require('./router/admin/Result_Search_Pssengers_Using_Flight_Number_Router');
-const cookieParser = require('cookie-parser');
 
 
  require('./Association/Association');
@@ -39,7 +38,6 @@ app.set("views", 'views');
 app.use(bodyParser.urlencoded());
 app.use(express.json());
 app.use(express.static('public'));
-app.use(cookieParser());
 
 
 app.use(loginRouter);

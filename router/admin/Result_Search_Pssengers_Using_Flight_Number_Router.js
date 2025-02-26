@@ -4,7 +4,6 @@
 
 const express = require('express');
 const { ResultsearchPassengerUsingFlight_Number_Controler } = require('../../controler/admin/Search_Pssengers_Using_Flight_Number_Controler');
-const { adminAuthMiddleware } = require('../../middleware/Admin_Auth_Middleware');
 
 const ResultsearchPassengerUsingFlight_Number_Router = express.Router();
 

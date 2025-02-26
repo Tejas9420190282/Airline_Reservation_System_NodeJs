@@ -1,6 +1,3 @@
-
-// flightScheduleControler.js
-
 const { Flight_Model } = require("../../models/Admin_Model/Flight_Model");
 
 

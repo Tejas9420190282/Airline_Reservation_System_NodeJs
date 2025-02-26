@@ -1,6 +1,5 @@
 
 const express = require('express');
-const { adminAuthMiddleware } = require('../../middleware/Admin_Auth_Middleware');
 
 const searchPassengerUsingFlight_Number_Router = express.Router();
 
